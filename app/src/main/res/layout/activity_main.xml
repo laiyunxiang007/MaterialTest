@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+     <!--加强版FrameLayout布局-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <!--AppBarLayout实际上是个垂直的linearLayout
+        (app:layout_scrollFlags="scroll|enterAlways|snap" 影响滚动事件)-->
+        <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    android:id="@+id/toolbar"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_scrollFlags="scroll|enterAlways|snap"
+            />
+        </com.google.android.material.appbar.AppBarLayout>
+         <!--下拉刷新（app:layout_behavior用来使滑动控件与AppBarLayout互动。）-->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/swipe_refresh"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recycler_view"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <!--悬浮控件（app:elevation 值越大，投影范围越大，投影效果越淡）-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fab"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_done"
+                app:elevation="8dp"
+        />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!--主页添加滑动菜单（android:layout_gravity相对于界面而说的）-->
+    <com.google.android.material.navigation.NavigationView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/nav_view"
+            android:layout_gravity="start"
+            app:menu="@menu/nav_menu"
+            app:headerLayout="@layout/nav_header"
+    />
+
+</androidx.drawerlayout.widget.DrawerLayout>
